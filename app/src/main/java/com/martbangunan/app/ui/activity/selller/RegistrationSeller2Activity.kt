@@ -1,4 +1,4 @@
-package com.martbangunan.app.ui.activity.customer
+package com.martbangunan.app.ui.activity.selller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,22 +8,24 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.martbangunan.app.R
-import com.martbangunan.app.network.model.RegistrationModel
-import com.martbangunan.app.ui.viewmodel.customer.Enqueue
+import com.martbangunan.app.network.model.RegistrationSellerModel
+import com.martbangunan.app.ui.activity.customer.MainActivity
 import com.martbangunan.app.ui.viewmodel.ScreenState
+import com.martbangunan.app.ui.viewmodel.customer.Enqueue
+import com.martbangunan.app.ui.viewmodel.seller.EnqueueSeller
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationSeller2Activity : AppCompatActivity() {
     private val TAG = this.toString()
 
-    private val btnRegistration: MaterialButton by lazy { findViewById(R.id.btnRegistration) }
+    private val btnRegistration: MaterialButton by lazy { findViewById(R.id.btnRegistrationSeller) }
 
-    private val viewModel: Enqueue.ApiRegistration by lazy {
-        ViewModelProvider(this).get(Enqueue.ApiRegistration::class.java)
+    private val viewModel: EnqueueSeller.ApiRegistrationSeller by lazy {
+        ViewModelProvider(this).get(EnqueueSeller.ApiRegistrationSeller::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+        setContentView(R.layout.activity_registration_seller2)
         supportActionBar?.hide()
 
         btnRegistration.setOnClickListener {
@@ -34,7 +36,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 
-    private fun processRegistration(state: ScreenState<RegistrationModel>) {
+    private fun processRegistration(state: ScreenState<RegistrationSellerModel>) {
 
         when (state) {
             is ScreenState.Loading -> {
@@ -45,7 +47,7 @@ class RegistrationActivity : AppCompatActivity() {
                 if (state.data != null) {
                     // action when success
                     Toast.makeText(this, "sukses, ${state.data}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainSellerActivity::class.java))
                 }
             }
             is ScreenState.Error -> {

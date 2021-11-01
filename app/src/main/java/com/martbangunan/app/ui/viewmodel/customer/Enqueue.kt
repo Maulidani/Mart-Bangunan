@@ -1,4 +1,4 @@
-package com.martbangunan.app.ui.viewmodel
+package com.martbangunan.app.ui.viewmodel.customer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import com.martbangunan.app.network.ApiClient
 import com.martbangunan.app.network.model.LoginModel
 import com.martbangunan.app.network.model.RegistrationModel
 import com.martbangunan.app.repository.Repository
+import com.martbangunan.app.ui.viewmodel.ScreenState
 
 class Enqueue {
 

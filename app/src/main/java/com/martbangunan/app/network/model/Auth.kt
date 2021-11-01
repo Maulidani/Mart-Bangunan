@@ -6,3 +6,7 @@ data class LoginModel(
 data class RegistrationModel(
     val fullName: String
 )
+
+data class RegistrationSellerModel(
+    val fullName: String
+)

@@ -1,14 +1,10 @@
 package com.martbangunan.app.ui.activity.selller
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.martbangunan.app.R
-import com.martbangunan.app.ui.fragment.customer.AccountFragment
-import com.martbangunan.app.ui.fragment.customer.CartFragment
-import com.martbangunan.app.ui.fragment.customer.CategoryFragment
-import com.martbangunan.app.ui.fragment.customer.HomeFragment
 import com.martbangunan.app.ui.fragment.seller.*
 
 class MainSellerActivity : AppCompatActivity() {

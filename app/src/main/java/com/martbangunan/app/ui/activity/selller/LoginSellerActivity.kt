@@ -1,4 +1,4 @@
-package com.martbangunan.app.ui.activity.customer
+package com.martbangunan.app.ui.activity.selller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,22 +9,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.martbangunan.app.R
 import com.martbangunan.app.network.model.LoginModel
-import com.martbangunan.app.ui.viewmodel.customer.Enqueue
+import com.martbangunan.app.ui.activity.customer.RegistrationActivity
 import com.martbangunan.app.ui.viewmodel.ScreenState
-import kotlin.properties.Delegates
+import com.martbangunan.app.ui.viewmodel.seller.EnqueueSeller
 
-class LoginActivity : AppCompatActivity() {
+class LoginSellerActivity : AppCompatActivity() {
     private val TAG = this.toString()
 
-    private val btnLogin: MaterialButton by lazy { findViewById(R.id.btnLogin) }
+    private val btnLogin: MaterialButton by lazy { findViewById(R.id.btnLoginSeller) }
 
-    private val viewModel: Enqueue.ApiLogin by lazy {
-        ViewModelProvider(this).get(Enqueue.ApiLogin::class.java)
+    private val viewModel: EnqueueSeller.ApiLoginSeller by lazy {
+        ViewModelProvider(this).get(EnqueueSeller.ApiLoginSeller::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_seller)
         supportActionBar?.hide()
 
         btnLogin.setOnClickListener {
@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                 if (state.data != null) {
                     // action when success
                     Toast.makeText(this, "sukses, ${state.data}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, RegistrationActivity::class.java))
+                    startActivity(Intent(this, RegistrationSellerActivity::class.java))
                 }
             }
             is ScreenState.Error -> {
@@ -54,4 +54,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 }
