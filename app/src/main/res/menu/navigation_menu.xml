@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_home"
+        android:title="Beranda" />
+    <item
+        android:id="@+id/navCategory"
+        android:icon="@drawable/ic_home"
+        android:title="Kategory" />
+    <item
+        android:id="@+id/navCart"
+        android:icon="@drawable/ic_home"
+        android:title="Gerobak" />
+    <item
+        android:id="@+id/navAccount"
+        android:icon="@drawable/ic_home"
+        android:title="Akun" />
+</menu>
