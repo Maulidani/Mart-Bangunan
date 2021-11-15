@@ -7,18 +7,18 @@
         android:title="Beranda" />
     <item
         android:id="@+id/navChat"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_chat"
         android:title="Chat" />
     <item
         android:id="@+id/navProduct"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_category"
         android:title="Produk" />
     <item
         android:id="@+id/navSale"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_sold"
         android:title="Penjualan" />
     <item
         android:id="@+id/navOthers"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_account"
         android:title="Lainnya" />
 </menu>

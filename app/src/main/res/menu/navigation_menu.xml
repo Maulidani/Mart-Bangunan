@@ -6,14 +6,14 @@
         android:title="Beranda" />
     <item
         android:id="@+id/navCategory"
-        android:icon="@drawable/ic_home"
-        android:title="Kategory" />
+        android:icon="@drawable/ic_category"
+        android:title="Kategori" />
     <item
         android:id="@+id/navCart"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_cart"
         android:title="Gerobak" />
     <item
         android:id="@+id/navAccount"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_account"
         android:title="Akun" />
 </menu>

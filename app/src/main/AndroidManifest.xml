@@ -9,20 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MartBangunan">
-        <activity android:name=".ui.activity.selller.RegistrationSeller2Activity"></activity>
-        <activity android:name=".ui.activity.selller.RegistrationSellerActivity" />
-        <activity android:name=".ui.activity.selller.LoginSellerActivity" >
+        <activity android:name=".ui.LoginAsActivity"></activity>
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.selller.MainSellerActivity" />
-        <activity android:name=".ui.activity.customer.RegistrationActivity" />
-        <activity android:name=".ui.activity.customer.LoginActivity">
+        <activity android:name=".ui.activity.selller.RegistrationSeller2Activity" />
+        <activity android:name=".ui.activity.selller.RegistrationSellerActivity" />
+        <activity android:name=".ui.activity.selller.LoginSellerActivity">
 
         </activity>
+        <activity android:name=".ui.activity.selller.MainSellerActivity" />
+        <activity android:name=".ui.activity.customer.RegistrationActivity" />
+        <activity android:name=".ui.activity.customer.LoginActivity" />
         <activity android:name=".ui.activity.customer.MainActivity" />
     </application>
 
