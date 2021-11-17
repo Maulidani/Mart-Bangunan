@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.button.MaterialButton
 import com.martbangunan.app.R
+import com.martbangunan.app.ui.activity.customer.LoginActivity
 import com.martbangunan.app.ui.activity.customer.MainActivity
+import com.martbangunan.app.ui.activity.selller.LoginSellerActivity
 import com.martbangunan.app.ui.activity.selller.MainSellerActivity
 
 class LoginAsActivity : AppCompatActivity() {
@@ -19,10 +21,10 @@ class LoginAsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login_as)
 
         btnSeller.setOnClickListener {
-            startActivity(Intent(this, MainSellerActivity::class.java))
+            startActivity(Intent(this, LoginSellerActivity::class.java))
         }
         btnCustomer.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

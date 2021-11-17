@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/black" />
+            android:src="@color/black" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvProductName"
@@ -32,16 +33,26 @@
             tools:text="Nama Barang" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvProductPrice"
+            android:id="@+id/tvInfoPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="12dp"
             android:textColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/imgProduct"
             app:layout_constraintTop_toBottomOf="@id/tvProductName"
-            tools:text="100.000" />
+            tools:text="Rp." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/red"
+            app:layout_constraintLeft_toRightOf="@id/tvInfoPrice"
+            app:layout_constraintTop_toTopOf="@id/tvInfoPrice"
+            tools:text="10000000000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

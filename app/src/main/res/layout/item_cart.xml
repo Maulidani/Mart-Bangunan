@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp">
+
+        <CheckBox
+            android:id="@+id/cbCartProduct"
+            android:text=" "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCartProduct"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            app:layout_constraintLeft_toRightOf="@id/cbCartProduct"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@color/gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameCartProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Nama Produk"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@id/imgCartProduct"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvInfoPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/red"
+            app:layout_constraintLeft_toLeftOf="@id/tvNameCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvNameCartProduct"
+            android:text="Rp." />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPriceCartProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/red"
+            app:layout_constraintLeft_toRightOf="@id/tvInfoPrice"
+            app:layout_constraintTop_toTopOf="@id/tvInfoPrice"
+            tools:text="10000000000" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/imgCartProduct"
+            app:layout_constraintLeft_toLeftOf="@id/tvNameCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvPriceCartProduct">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgMinusCartProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:src="@drawable/ic_minus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etQuantityCartProduct"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="6dp"
+                android:text="0"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/imgMinusCartProduct"
+                app:layout_constraintLeft_toRightOf="@id/imgMinusCartProduct"
+                app:layout_constraintTop_toTopOf="@id/imgMinusCartProduct" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgPlusCartProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@color/gray"
+                android:src="@drawable/ic_plus"
+                app:layout_constraintBottom_toBottomOf="@id/etQuantityCartProduct"
+                app:layout_constraintLeft_toRightOf="@+id/etQuantityCartProduct"
+                app:layout_constraintTop_toTopOf="@id/etQuantityCartProduct" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
