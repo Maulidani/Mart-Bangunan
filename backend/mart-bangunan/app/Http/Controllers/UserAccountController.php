@@ -17,11 +17,11 @@ class UserAccountController extends Controller
         $user = User::join('addresses', 'users.address_id', '=', 'addresses.id')
             ->join('user_accounts', 'users.user_account_id', '=', 'user_accounts.id')
             ->where('user_accounts.id', $id)
-            ->get(['users.*', 'addresses.name as address', 'addresses.*', 'user_accounts.*']);
+            ->get(['users.name as user_name','users.*', 'addresses.name as address', 'addresses.*', 'user_accounts.*'])->first();
 
         return response()->json([
             'message' => 'Success',
-            'errors' => true,
+            'errors' => false,
             'user' => $user
         ]);;
     }
@@ -37,15 +37,15 @@ class UserAccountController extends Controller
         $user_account = new UserAccount;
         $user_account->email = $request->email;
         $user_account->password = bcrypt($request->password);
+        $user_account->type = $request->type;
         $user_account->save();
 
         $user_address = new UserAddress();
         $user_address->name = $request->address_name;
-        $user_address->country = $request->country;
+        $user_address->country = "indonesia";
         $user_address->province = $request->province;
         $user_address->city = $request->city;
         $user_address->districts = $request->districts;
-        $user_address->zip_code = $request->zip_code;
         $user_address->save();
 
         $files = $request->image;
@@ -67,6 +67,7 @@ class UserAccountController extends Controller
                 $user->image = $filename;
                 $user->address_id = $user_address->id;
                 $user->user_account_id = $user_account->id;
+                $user->npwp = $request->npwp;
                 $user->save();
             }
         }
@@ -96,18 +97,32 @@ class UserAccountController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = md5(time()) . '.' . md5($request->email);
-            $user->forceFill([
-                'api_token' => $token,
-            ])->save();
 
-            return response()->json([
-                'api_token' => $token
-            ]);
+            $user = Auth::user();
+
+            if ($user->type === $request->type) {
+                $token = md5(time()) . '.' . md5($request->email);
+                $user->forceFill([
+                    'api_token' => $token,
+                ])->save();
+
+                return response()->json([
+                    'message' => 'Success',
+                    'errors' => false,
+                    'api_token' => $token,
+                ]);
+                
+            } else {
+                return response()->json([
+                    'message' => 'the provided credentials do not match our records',
+                    'errors' => true,
+                ]);
+            }
+            
         } else {
             return response()->json([
-                'message' => 'the provided credentials do not match our records'
+                'message' => 'the provided credentials do not match our records',
+                'errors' => true,
             ]);
         }
     }

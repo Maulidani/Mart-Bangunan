@@ -18,10 +18,49 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $product = collect(Product::join('image_products', 'products.id', '=', 'image_products.product_id')->orderBy('products.created_at', 'DESC')->get());
+        $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
+        ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+        ->join('users', 'products.user_id', '=', 'users.user_account_id')
+        ->orderBy('products.created_at', 'DESC')
+        ->get(['users.name as seller_name','users.image as seller_image','products.*', 'image_products.*', 'product_categories.name as category']);
 
-        $unique = $product->unique('product_id');
-        $unique->values()->all();
+        $unique = $product->unique('product_id')->values();
+
+        return response()->json([
+            'message' => 'Success',
+            'errors' => false,
+            'product' => $unique,
+        ]);
+    }
+    
+    public function categoryProduct(Request $request)
+    {
+        $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
+        ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+        ->join('users', 'products.user_id', '=', 'users.user_account_id')
+        ->where('products.product_category_id', $request->category_id)
+        ->orderBy('products.created_at', 'DESC')
+        ->get(['users.name as seller_name','users.image as seller_image','products.*', 'image_products.*', 'product_categories.name as category']);
+
+        $unique = $product->unique('product_id')->values();
+
+        return response()->json([
+            'message' => 'Success',
+            'errors' => false,
+            'product' => $unique,
+        ]);
+    }
+    
+    public function sellerProduct(Request $request)
+    {
+        $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
+        ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+        ->join('users', 'products.user_id', '=', 'users.user_account_id')
+        ->where('products.user_id', $request->seller_id)
+        ->orderBy('products.created_at', 'DESC')
+        ->get(['users.name as seller_name','users.image as seller_image','products.*', 'image_products.*', 'product_categories.name as category']);
+
+        $unique = $product->unique('product_id')->values();
 
         return response()->json([
             'message' => 'Success',
@@ -119,26 +158,37 @@ class ProductController extends Controller
         $files = $request->image;
         $allowedfileExtension = ['jpeg', 'jpg', 'png', 'JPG', 'JPEG'];
 
-        if ($request->hasfile('image')) { {
-                foreach ($files as $img) {
+        if ($request->hasfile('image')) {
+            foreach ($files as $img) {
 
-                    $filename = time() . '.' . $img->getClientOriginalName();
-                    $extension = $img->getClientOriginalExtension();
+                $filename = time() . '.' . $img->getClientOriginalName();
+                $extension = $img->getClientOriginalExtension();
 
-                    $check = in_array($extension, $allowedfileExtension);
+                $check = in_array($extension, $allowedfileExtension);
 
-                    if ($check) {
+                if ($check) {
 
-                        $img->move(public_path() . '/image/product/', $filename);
+                    $img->move(public_path() . '/image/product/', $filename);
 
-                        $product_image = new ProductImage;
-                        $product_image->product_id = $request->product_id;
-                        $product_image->image = $filename;
-                        $product_image->save();
-                    }
+                    $product_image = new ProductImage;
+                    $product_image->product_id = $request->product_id;
+                    $product_image->image = $filename;
+                    $product_image->save();
                 }
             }
         }
+
+        return response()->json([
+            'message' => 'Success',
+            'errors' => false,
+        ]);
+    }
+
+    public function deleteProduct(Request $request) {
+        Product::where(
+            'id',
+            $request->id
+        )->delete();
 
         return response()->json([
             'message' => 'Success',

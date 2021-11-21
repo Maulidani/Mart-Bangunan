@@ -12,7 +12,7 @@ class User extends Model
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'phone', 'image','address_id','user_account_id',
+        'name', 'phone', 'image','address_id','user_account_id','npwp',
     ];
 
     public function address()

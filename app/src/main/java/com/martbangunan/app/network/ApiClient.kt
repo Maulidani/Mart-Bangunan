@@ -21,7 +21,7 @@ object ApiClient {
             val originalRequest: Request = chain.request()
             val newRequest: Request = originalRequest.newBuilder()
 //                .header("Content-Type", "application/json")
-//                .header("X-Requested-With", "XMLHttpRequest")
+                .header("X-Requested-With", "XMLHttpRequest")
                 .build()
             chain.proceed(newRequest)
         })

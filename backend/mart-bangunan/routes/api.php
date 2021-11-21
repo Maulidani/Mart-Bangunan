@@ -27,5 +27,16 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('add-image-product', 'ProductController@addImage');
     Route::post('edit-product', 'ProductController@editProduct');
     Route::get('all-product', 'ProductController@index');
+    Route::post('delete-product', 'ProductController@deleteProduct');
+    Route::post('category-product', 'ProductController@categoryProduct');
+    Route::post('seller-product', 'ProductController@sellerProduct');
+
+    //order
+    // Route::post('add-order', 'OrderController@addOrder');
+
+    //cart
+    Route::post('add-cart', 'CartController@AddCart');
+    Route::post('my-cart', 'CartController@myCart');
+    Route::post('delete-cart', 'CartController@deleteCart');
 
 });
