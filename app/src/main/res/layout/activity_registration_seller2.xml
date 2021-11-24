@@ -2,38 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentRegistrationSeller2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.selller.RegistrationSeller2Activity">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="match_parent"
+        android:id="@+id/imgProfie"
+        android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@id/fullNameTextField"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintBottom_toTopOf="@id/addresstTextField"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPilihFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lengkapi Data"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/fullNameTextField"
+        android:layout_marginTop="12dp"
+        android:text="Pilih foto profil toko"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgProfie" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fullNameTextField"
+        android:id="@+id/addresstTextField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="200dp"
-        android:hint=" Nama Pemilik Toko"
+        android:hint=" Alamat Lengkap Toko"
         app:boxCornerRadiusBottomEnd="26dp"
         app:boxCornerRadiusBottomStart="26dp"
         app:boxCornerRadiusTopEnd="26dp"
@@ -42,7 +46,30 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputFullName"
+            android:id="@+id/inputAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:lines="3" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/provinsiTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="6dp"
+        android:hint=" Provinsi"
+        app:boxCornerRadiusBottomEnd="26dp"
+        app:boxCornerRadiusBottomStart="26dp"
+        app:boxCornerRadiusTopEnd="26dp"
+        app:boxCornerRadiusTopStart="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/addresstTextField">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputProvince"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -50,21 +77,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nikTextField"
+        android:id="@+id/kotaTextField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="6dp"
-        android:hint=" NIK"
+        android:hint=" Kota/kabupaten"
         app:boxCornerRadiusBottomEnd="26dp"
         app:boxCornerRadiusBottomStart="26dp"
         app:boxCornerRadiusTopEnd="26dp"
         app:boxCornerRadiusTopStart="26dp"
-        app:layout_constraintTop_toBottomOf="@id/fullNameTextField">
+        app:layout_constraintTop_toBottomOf="@id/provinsiTextField">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputNik"
+            android:id="@+id/inputCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -72,81 +99,36 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailTextField"
+        android:id="@+id/kecamatanTextField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="6dp"
-        android:hint=" Email"
+        android:hint=" Kecamatan"
         app:boxCornerRadiusBottomEnd="26dp"
         app:boxCornerRadiusBottomStart="26dp"
         app:boxCornerRadiusTopEnd="26dp"
         app:boxCornerRadiusTopStart="26dp"
-        app:layout_constraintTop_toBottomOf="@+id/nikTextField">
+        app:layout_constraintTop_toBottomOf="@id/kotaTextField">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEmail"
+            android:id="@+id/inputDistrincts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        android:hint=" Kata Sandi"
-        app:boxCornerRadiusBottomEnd="26dp"
-        app:boxCornerRadiusBottomStart="26dp"
-        app:boxCornerRadiusTopEnd="26dp"
-        app:boxCornerRadiusTopStart="26dp"
-        app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@id/emailTextField">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        android:hint=" No. Telepon"
-        app:boxCornerRadiusBottomEnd="26dp"
-        app:boxCornerRadiusBottomStart="26dp"
-        app:boxCornerRadiusTopEnd="26dp"
-        app:boxCornerRadiusTopStart="26dp"
-        app:layout_constraintTop_toBottomOf="@id/passwordTextField">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRegistrationSeller"
+        android:id="@+id/btnRegistration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="12dp"
         android:text="daftar"
         app:cornerRadius="18dp"
-        app:layout_constraintTop_toBottomOf="@id/phoneTextField" />
+        app:layout_constraintTop_toBottomOf="@id/kecamatanTextField" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"

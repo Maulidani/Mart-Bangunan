@@ -32,7 +32,6 @@ import retrofit2.Response
 import java.io.File
 
 class Registration2Activity : AppCompatActivity() {
-
     private val parentView: ConstraintLayout by lazy { findViewById(R.id.parentRegistration2) }
 
     private val btnRegistration: MaterialButton by lazy { findViewById(R.id.btnRegistration) }
@@ -153,7 +152,7 @@ class Registration2Activity : AppCompatActivity() {
                 } else {
                     Snackbar.make(
                         parentView,
-                        "Gagal", Snackbar.LENGTH_SHORT
+                        "Gagal: periksa kembali data anda", Snackbar.LENGTH_SHORT
                     ).show()
                 }
             }

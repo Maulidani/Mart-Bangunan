@@ -42,108 +42,116 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swapRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/appBar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="32dp"
-                android:paddingVertical="24dp">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgProfileAccount"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@color/gray"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/imgProfileAccount"
-                    app:layout_constraintLeft_toRightOf="@id/imgProfileAccount"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/imgProfileAccount"
-                    tools:text="Nama Account" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvMyOrder"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:drawableRight="@drawable/ic_right"
-                    android:text="Pesanan Saya"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imgProfileAccount" />
+                    android:paddingHorizontal="32dp"
+                    android:paddingVertical="24dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDataDiri"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:drawableRight="@drawable/ic_right"
-                    android:text="Data Diri"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvMyOrder" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgProfileAccount"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_profile"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvOther"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Lainnya"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvDataDiri" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvNameProfileAccount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Nama Account"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/imgProfileAccount"
+                        app:layout_constraintLeft_toRightOf="@id/imgProfileAccount"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/imgProfileAccount" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTentang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Tentang Mart Bangunan"
-                    android:textColor="@color/black"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvOther" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMyOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:drawableRight="@drawable/ic_right"
+                        android:text="Pesanan Saya"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imgProfileAccount" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSyarat7Ketentuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Syarat dan Ketentuan"
-                    android:textColor="@color/black"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTentang" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDataDiri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawableRight="@drawable/ic_right"
+                        android:text="Data Diri"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMyOrder" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvlogout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Keluar"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvSyarat7Ketentuan" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Lainnya"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDataDiri" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTentang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Tentang Mart Bangunan"
+                        android:textColor="@color/black"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvOther" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSyarat7Ketentuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Syarat dan Ketentuan"
+                        android:textColor="@color/black"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTentang" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvlogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Keluar"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSyarat7Ketentuan" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

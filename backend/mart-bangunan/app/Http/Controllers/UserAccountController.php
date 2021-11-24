@@ -17,7 +17,7 @@ class UserAccountController extends Controller
         $user = User::join('addresses', 'users.address_id', '=', 'addresses.id')
             ->join('user_accounts', 'users.user_account_id', '=', 'user_accounts.id')
             ->where('user_accounts.id', $id)
-            ->get(['users.name as user_name','users.*', 'addresses.name as address', 'addresses.*', 'user_accounts.*'])->first();
+            ->get(['users.name as user_name', 'users.id as user_id','users.*', 'addresses.name as address', 'addresses.*', 'user_accounts.*'])->first();
 
         return response()->json([
             'message' => 'Success',
@@ -59,7 +59,7 @@ class UserAccountController extends Controller
 
             if ($check) {
 
-                $files->move(public_path() . '/image/product/', $filename);
+                $files->move(public_path() . '/image/user/', $filename);
 
                 $user = new User;
                 $user->name = $request->name;
@@ -67,13 +67,89 @@ class UserAccountController extends Controller
                 $user->image = $filename;
                 $user->address_id = $user_address->id;
                 $user->user_account_id = $user_account->id;
-                $user->npwp = $request->npwp;
                 $user->save();
             }
         }
 
 
         if ($user && $user_account && $user_address) {
+
+            return response()->json([
+                'message' => 'Success',
+                'errors' => false,
+            ]);
+        } else {
+
+            return response()->json([
+                'message' => 'Fail',
+                'errors' => true,
+            ]);
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user_account = UserAccount::find($request->user()->id);
+        $user_account->email = $request->email;
+        $user_account->type = $request->type;
+        $user_account->save();
+
+        $user_address = UserAddress::find($request->address_id);
+        $user_address->name = $request->address_name;
+        $user_address->country = "indonesia";
+        $user_address->province = $request->province;
+        $user_address->city = $request->city;
+        $user_address->districts = $request->districts;
+        $user_address->save();
+
+        $user = User::find($request->user_id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address_id = $user_address->id;
+        $user->user_account_id = $user_account->id;
+        $user->save();
+
+        if ($user && $user_account && $user_address) {
+
+            return response()->json([
+                'message' => 'Success',
+                'errors' => false,
+            ]);
+        } else {
+
+            return response()->json([
+                'message' => 'Fail',
+                'errors' => true,
+            ]);
+        }
+    }
+    public function editImage(Request $request)
+    {
+        $files = $request->image;
+        $allowedfileExtension = ['jpeg', 'jpg', 'png', 'JPG', 'JPEG'];
+        if ($request->hasfile('image')) {
+
+            $filename = time() . '.' . $files->getClientOriginalName();
+            $extension = $files->getClientOriginalExtension();
+
+            $check = in_array($extension, $allowedfileExtension);
+
+            if ($check) {
+
+                $files->move(public_path() . '/image/user/', $filename);
+
+                $user = User::find($request->user_id);
+                $user->image = $filename;
+                $user->save();
+            }
+        }
+
+
+        if ($user) {
 
             return response()->json([
                 'message' => 'Success',
@@ -110,15 +186,14 @@ class UserAccountController extends Controller
                     'message' => 'Success',
                     'errors' => false,
                     'api_token' => $token,
+                    'id' => $request->user()->id,
                 ]);
-                
             } else {
                 return response()->json([
                     'message' => 'the provided credentials do not match our records',
                     'errors' => true,
                 ]);
             }
-            
         } else {
             return response()->json([
                 'message' => 'the provided credentials do not match our records',

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.button.MaterialButton
@@ -87,11 +86,12 @@ class LoginActivity : AppCompatActivity() {
                     val message = response.body()?.message
                     val error = response.body()?.errors
                     val token = response.body()?.api_token
+                    val id = response.body()?.id
 
                     if (response.isSuccessful) {
                         if (error == false) {
 
-                            saveSession(token!!)
+                            saveSession(token!!,id)
                         } else {
 
                             Snackbar.make(
@@ -118,9 +118,10 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
-    private fun saveSession(apiToken: String) {
+    private fun saveSession(apiToken: String, id: String?) {
 
         sharedPref.put(Constant.PREF_AUTH_TOKEN, apiToken)
+        sharedPref.put(Constant.PREF_ID, id.toString())
         sharedPref.put(Constant.PREF_TYPE, typeLogin)
         sharedPref.put(Constant.PREF_IS_LOGIN, true)
         Log.e(this.toString(), "token: $apiToken")

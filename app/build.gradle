@@ -47,6 +47,9 @@ dependencies {
     //Cirle Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //image slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
     //viewmodel & livedata
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-rc01'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01'

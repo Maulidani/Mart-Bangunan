@@ -2,6 +2,7 @@ package com.martbangunan.app.network.model
 
 data class LoginModel(
     val api_token: String,
+    val id: String,
     val errors: Boolean,
     val message: String,
 )
@@ -22,6 +23,7 @@ data class LogoutModel(
 
 data class UserInfoModel(
     val id: Int,
+    val user_id: Int,
     val user_account_id: Int,
     val user_name: String,
     val phone: Int,
