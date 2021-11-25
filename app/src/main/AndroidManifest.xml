@@ -15,7 +15,7 @@
         <activity android:name=".ui.activity.EditAccountActivity"></activity>
         <activity android:name=".ui.activity.selller.EditImageProductActivity" />
         <activity android:name=".ui.activity.selller.UploadProductActivity" />
-        <activity android:name=".ui.fragment.customer.ProductDetailActivity" />
+        <activity android:name=".ui.activity.ProductDetailActivity" />
         <activity android:name=".ui.activity.customer.Registration2Activity" />
         <activity android:name=".ui.activity.customer.ProductActivity" />
         <activity android:name=".ui.activity.LoginAsActivity" />

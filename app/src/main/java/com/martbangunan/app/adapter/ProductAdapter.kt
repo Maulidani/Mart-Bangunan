@@ -17,11 +17,9 @@ import com.martbangunan.app.network.ApiClient
 import com.martbangunan.app.network.model.ProductDetailModel
 import com.martbangunan.app.network.model.ProductModel
 import com.martbangunan.app.ui.activity.selller.UploadProductActivity
-import com.martbangunan.app.ui.fragment.customer.ProductDetailActivity
+import com.martbangunan.app.ui.activity.ProductDetailActivity
 import com.martbangunan.app.utils.Constant
 import com.martbangunan.app.utils.PreferencesHelper
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -63,7 +63,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Part parts: MultipartBody.Part,
         @Part("user_id") id: RequestBody,
-        ): Call<RegisterModel>
+    ): Call<RegisterModel>
 
     @FormUrlEncoded
     @POST("all-product")
@@ -132,5 +132,24 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Part("product_id") id: RequestBody,
         @Part parts: ArrayList<MultipartBody.Part>,
+    ): Call<ProductModel>
+
+    @FormUrlEncoded
+    @POST("add-cart")
+    fun addCart(
+        @Header("Authorization") token: String,
+        @Field("product_id") id: Int,
+    ): Call<ProductModel>
+
+    @POST("my-cart")
+    fun myCart(
+        @Header("Authorization") token: String,
+    ): Call<ProductModel>
+
+    @FormUrlEncoded
+    @POST("delete-cart")
+    fun deleteCart(
+        @Header("Authorization") token: String,
+        @Field("id") id: Int,
     ): Call<ProductModel>
 }

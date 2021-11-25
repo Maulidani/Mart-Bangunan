@@ -186,9 +186,8 @@ class AccountFragment : Fragment() {
                             "Gagal logout", Snackbar.LENGTH_SHORT
                         ).show()
                     }
-                    swipeRefresh.isRefreshing = false
-
                 }
+                swipeRefresh.isRefreshing = false
             }
 
             override fun onFailure(call: Call<LogoutModel>, t: Throwable) {
@@ -199,10 +198,8 @@ class AccountFragment : Fragment() {
                     ).show()
 
                     Log.e(this.toString(), "user: gagal")
-
-                    swipeRefresh.isRefreshing = false
-
                 }
+                swipeRefresh.isRefreshing = false
             }
 
         })

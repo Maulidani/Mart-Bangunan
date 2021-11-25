@@ -103,12 +103,9 @@ class HomeFragment : Fragment() {
                                 parentView,
                                 "Gogal memuat informasi", Snackbar.LENGTH_SHORT
                             ).show()
-
                         }
-
-                        swipeRefresh.isRefreshing = false
-
                     }
+                    swipeRefresh.isRefreshing = false
                 }
 
                 override fun onFailure(call: Call<ProductModel>, t: Throwable) {
@@ -117,8 +114,8 @@ class HomeFragment : Fragment() {
                             parentView,
                             t.message.toString(), Snackbar.LENGTH_SHORT
                         ).show()
-                        swipeRefresh.isRefreshing = false
                     }
+                    swipeRefresh.isRefreshing = false
                 }
 
             })

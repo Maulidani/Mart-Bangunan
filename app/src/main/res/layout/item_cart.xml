@@ -11,6 +11,14 @@
         android:layout_height="match_parent"
         android:layout_margin="24dp">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDeleteCart"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete_cart"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
         <CheckBox
             android:id="@+id/cbCartProduct"
             android:text=" "
@@ -63,6 +71,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parentQuantity"
             android:layout_width="wrap_content"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/imgCartProduct"
             app:layout_constraintLeft_toLeftOf="@id/tvNameCartProduct"
@@ -81,9 +90,12 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etQuantityCartProduct"
                 android:layout_width="40dp"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="0"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="10"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/imgMinusCartProduct"
                 app:layout_constraintLeft_toRightOf="@id/imgMinusCartProduct"

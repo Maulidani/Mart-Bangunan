@@ -1,16 +1,20 @@
-package com.martbangunan.app.ui.fragment.customer
+package com.martbangunan.app.ui.activity
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.martbangunan.app.R
 import com.martbangunan.app.adapter.ImageSlideAdapter
 import com.martbangunan.app.network.ApiClient
+import com.martbangunan.app.network.model.ProductModel
+import com.martbangunan.app.network.model.RegisterModel
 import com.martbangunan.app.network.model.SliderItem
 import com.martbangunan.app.utils.Constant
 import com.martbangunan.app.utils.PreferencesHelper
@@ -37,6 +41,9 @@ class ProductDetailActivity : AppCompatActivity() {
     val tvPrice: TextView by lazy { findViewById(R.id.tvProductPrice) }
     val tvDecription: TextView by lazy { findViewById(R.id.tvDeskripsi) }
     val imgSLider: SliderView by lazy { findViewById(R.id.rvImageProduct) }
+
+    val btnCart: MaterialButton by lazy { findViewById(R.id.btnCart) }
+    val btnCheckout: MaterialButton by lazy { findViewById(R.id.btnCheckout) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +83,13 @@ class ProductDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        btnCart.setOnClickListener {
+            addCart(token, idProduct)
+        }
+        btnCheckout.setOnClickListener {
+
+        }
+
     }
 
     private fun getImage(token: String, id: String) {
@@ -110,5 +124,45 @@ class ProductDetailActivity : AppCompatActivity() {
 
             })
 
+    }
+
+    private fun addCart(token: String?, idProduct: String?) {
+
+        ApiClient.instances.addCart("Bearer $token", idProduct!!.toInt()).enqueue(object : Callback<ProductModel> {
+            override fun onResponse(
+                call: Call<ProductModel>,
+                response: Response<ProductModel>
+            ) {
+                val message = response.body()?.message
+                if (response.isSuccessful) {
+                    if (message == "Success") {
+                        Snackbar.make(
+                            parentView,
+                            "Berhasil tambah ke gerobak", Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Snackbar.make(
+                            parentView,
+                            "Gagal", Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+
+                } else {
+                    Snackbar.make(
+                        parentView,
+                        "Gagal", Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ProductModel>, t: Throwable) {
+                Snackbar.make(
+                    parentView,
+                    "Gagal", Snackbar.LENGTH_SHORT
+                ).show()
+
+                Log.e(this.toString(), "onFailure: " + t.message.toString())
+            }
+        })
     }
 }
