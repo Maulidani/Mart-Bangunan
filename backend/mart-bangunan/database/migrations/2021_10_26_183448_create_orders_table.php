@@ -21,7 +21,8 @@ class CreateOrdersTable extends Migration
             $table->integer('tax');
             $table->integer('total');
             $table->string('note')->nullable()->default(null);
-            $table->bigInteger('status_id');
+            $table->string('order_id_midtrans');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -78,7 +78,6 @@ class OthersSellerFragment : Fragment() {
             Log.e(this.toString(), "user: loading...")
             user(token)
         }
-
     }
 
     private fun user(token: String?) {

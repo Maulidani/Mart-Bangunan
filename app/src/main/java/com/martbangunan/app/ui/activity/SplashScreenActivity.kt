@@ -1,9 +1,13 @@
 package com.martbangunan.app.ui.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.martbangunan.app.R
 import com.martbangunan.app.ui.activity.customer.MainActivity
 import com.martbangunan.app.ui.activity.selller.MainSellerActivity
@@ -21,6 +25,13 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         sharedPref = PreferencesHelper(this)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_PHONE_STATE),
+                101
+            )
+        }
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)

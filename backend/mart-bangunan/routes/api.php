@@ -42,4 +42,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('my-cart', 'CartController@myCart');
     Route::post('delete-cart', 'CartController@deleteCart');
 
+    //order
+    Route::post('add-order', 'OrderController@addOrder');
+    Route::post('get-order', 'OrderController@getOrder');
+    Route::post('verification-order', 'OrderController@verificationOrder');
+    Route::post('product-order', 'OrderController@getProductOrder');
+
 });
+
+Route::post('/midtrans/charge', 'OrderController@midtrans');

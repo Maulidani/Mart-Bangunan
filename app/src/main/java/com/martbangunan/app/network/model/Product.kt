@@ -45,3 +45,9 @@ data class CartTotalModel(
     val price: Int,
     val product_id: Int,
 )
+
+data class CartProductNameModel(
+    val price: Int,
+    val name: String,
+    val product_id: Int,
+)

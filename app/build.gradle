@@ -72,6 +72,11 @@ dependencies {
     //coil (image)
     implementation("io.coil-kt:coil:1.3.2")
 
+    //midtrans (payment gateway)
+    implementation 'com.midtrans:uikit:1.28.0-SANDBOX' // change the number to the latest version
+
+    implementation 'com.koushikdutta.ion:ion:3.1.0'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

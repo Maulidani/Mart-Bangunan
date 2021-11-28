@@ -152,4 +152,15 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Field("id") id: Int,
     ): Call<ProductModel>
+
+//    @FormUrlEncoded
+//    @POST("add-order")
+//    fun addOrder(
+//        @Header("Authorization") token: String,
+//        @Field("shipping") shipping: Int,
+//        @Field("note") note: String,
+//        @Field("order_id_midtrans") orderIdMidtrans: String,
+//        @Field("total") total: Int,
+//        @Field("product_id") productId: Array<Int>,
+//    ): Call<ProductModel>
 }

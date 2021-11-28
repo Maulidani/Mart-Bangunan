@@ -78,18 +78,18 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@id/imgProfileAccount" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvMyOrder"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:drawableRight="@drawable/ic_right"
-                        android:text="Ulasan Costumer "
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/imgProfileAccount" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tvMyOrder"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="24dp"-->
+<!--                        android:drawableRight="@drawable/ic_right"-->
+<!--                        android:text="Ulasan Costumer "-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/imgProfileAccount" />-->
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvProfileSeller"
@@ -102,7 +102,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvMyOrder" />
+                        app:layout_constraintTop_toBottomOf="@id/imgProfileAccount" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvOther"
