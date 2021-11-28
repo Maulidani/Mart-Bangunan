@@ -111,6 +111,53 @@
         app:layout_constraintTop_toTopOf="@id/tvInfoPrice"
         tools:text="10000000000" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/tvProductPrice"
+        app:layout_constraintLeft_toRightOf="@id/tvProductPrice"
+        app:layout_constraintTop_toTopOf="@id/tvProductPrice"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMinusCartProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etQuantityCartProduct"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="10"
+            android:text="0"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/imgMinusCartProduct"
+            app:layout_constraintLeft_toRightOf="@id/imgMinusCartProduct"
+            app:layout_constraintTop_toTopOf="@id/imgMinusCartProduct" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgPlusCartProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@color/gray"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/etQuantityCartProduct"
+            app:layout_constraintLeft_toRightOf="@+id/etQuantityCartProduct"
+            app:layout_constraintTop_toTopOf="@id/etQuantityCartProduct" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvInfoSeller"
         android:layout_width="wrap_content"
@@ -134,10 +181,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/gray_light"
         android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/gray_light"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSeller">
 
@@ -167,10 +214,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="12dp"
-        android:id="@+id/parentBtn"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
