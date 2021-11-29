@@ -48,6 +48,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('verification-order', 'OrderController@verificationOrder');
     Route::post('product-order', 'OrderController@getProductOrder');
 
+    //chat
+    Route::post('chat', 'ChatController@getChat');
+    Route::post('add-chat', 'ChatController@addChat');
+    Route::post('list-chat', 'ChatController@listChat');
+
 });
 
 Route::post('/midtrans/charge', 'OrderController@midtrans');
