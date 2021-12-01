@@ -2,6 +2,7 @@ package com.martbangunan.app.ui.fragment.customer
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,13 +14,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.snackbar.Snackbar
 import com.martbangunan.app.R
 import com.martbangunan.app.adapter.ProductAdapter
+import com.martbangunan.app.adapter.SliderAdapter
 import com.martbangunan.app.network.ApiClient
+import com.martbangunan.app.network.model.BannerImage
+import com.martbangunan.app.network.model.BannerModel
 import com.martbangunan.app.network.model.ProductModel
+import com.martbangunan.app.ui.activity.customer.ChatActivity
 import com.martbangunan.app.ui.activity.customer.ProductActivity
 import com.martbangunan.app.utils.Constant
 import com.martbangunan.app.utils.PreferencesHelper
@@ -33,12 +41,15 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private lateinit var sharedPref: PreferencesHelper
     private val parentView: ConstraintLayout by lazy { requireActivity().findViewById(R.id.parentMainHome) }
+    private val chat: ImageView by lazy { requireActivity().findViewById(R.id.imgChat) }
     private val swipeRefresh: SwipeRefreshLayout by lazy { requireActivity().findViewById(R.id.swapRefresh) }
 
     private val search: TextView by lazy { requireActivity().findViewById(R.id.tvSearch) }
     private val rv: RecyclerView by lazy { requireActivity().findViewById(R.id.rvProduct) }
 
     private val tvAllProduct: TextView by lazy { requireActivity().findViewById(R.id.tvAllProduct) }
+
+    private val viewPager2: ViewPager2 by lazy { requireActivity().findViewById(R.id.vpBanner) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,10 +64,16 @@ class HomeFragment : Fragment() {
         sharedPref = PreferencesHelper(requireContext())
         val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
 
+        setBanner()
+        getBanner()
+
         swipeRefresh.setOnRefreshListener {
             product(token)
         }
 
+        chat.setOnClickListener {
+            startActivity(Intent(requireContext(), ChatActivity::class.java))
+        }
         search.setOnClickListener {
             startActivity(Intent(this.context, ProductActivity::class.java))
         }
@@ -120,5 +137,55 @@ class HomeFragment : Fragment() {
 
             })
     }
+    private fun getBanner() {
+        ApiClient.instances.banner().enqueue(object : Callback<BannerModel> {
+            override fun onResponse(call: Call<BannerModel>, response: Response<BannerModel>) {
 
+                viewPager2.adapter = SliderAdapter(response.body()!!.banner as ArrayList<BannerImage>, viewPager2)
+                Log.e("onResponse ", response.body()!!.banner.toString())
+
+            }
+
+            override fun onFailure(call: Call<BannerModel>, t: Throwable) {
+                Log.e("onFailure ", t.message.toString())
+            }
+
+        })
+    }
+    private val handler = Handler()
+    val sliderRunnable = Runnable {
+        kotlin.run {
+            viewPager2.currentItem = viewPager2.currentItem + 1
+        }
+    }
+    private fun setBanner() {
+        viewPager2.clipToPadding = false
+        viewPager2.clipChildren = false
+        viewPager2.offscreenPageLimit = 3
+        viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+
+        viewPager2.setPageTransformer(compositePageTransformer)
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                handler.removeCallbacks(sliderRunnable)
+                handler.postDelayed(sliderRunnable, 3000)
+            }
+        })
+    }
+    override fun onResume() {
+        super.onResume()
+        viewPager2.removeCallbacks(sliderRunnable)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewPager2.removeCallbacks(sliderRunnable)
+    }
 }

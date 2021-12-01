@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp">
+    android:layout_marginBottom="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="24dp">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parentInbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/gray_light"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -26,13 +25,17 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingTop="6dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:paddingEnd="24dp"
                 android:paddingBottom="3dp"
                 android:text="Pesan diterima" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvInboxTime"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tvInboxMessage"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingEnd="24dp"
@@ -40,14 +43,13 @@
                 android:text="waktu"
                 android:textSize="10sp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/gray_light"
-            android:visibility="gone"
-            android:id="@+id/parentSend"
+            android:background="@color/red"
             android:orientation="vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -56,25 +58,31 @@
                 android:id="@+id/tvSendMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="right"
                 android:paddingStart="24dp"
                 android:paddingTop="6dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="3dp"
-                android:text="Pesan diterima" />
+                android:text="Pesan dikirim"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvSendTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tvSendMessage"
+                app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="right"
                 android:gravity="right"
                 android:paddingStart="24dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="3dp"
                 android:text="waktu"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

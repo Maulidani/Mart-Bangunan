@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\User;
@@ -226,6 +227,17 @@ class ProductController extends Controller
             'message' => 'Success',
             'errors' => false,
             'image' => $product,
+        ]);
+    }
+
+    public function banner()
+    {
+        $banner = Banner::get();
+
+        return response()->json([
+            'message' => 'Success',
+            'errors' => false,
+            'banner' => $banner,
         ]);
     }
 }

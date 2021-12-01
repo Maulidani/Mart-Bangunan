@@ -18,7 +18,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buat Akun"
+        android:text="Buat Akun Toko"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -34,7 +34,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="200dp"
-        android:hint=" Nama Lengkap"
+        android:hint=" Nama Toko"
         app:boxCornerRadiusBottomEnd="26dp"
         app:boxCornerRadiusBottomStart="26dp"
         app:boxCornerRadiusTopEnd="26dp"

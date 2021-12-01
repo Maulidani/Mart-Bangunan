@@ -65,7 +65,7 @@
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/rvImageProduct"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@color/gray_light"
         app:layout_constraintTop_toBottomOf="@id/appBar"
         app:sliderAnimationDuration="600"
@@ -172,10 +172,22 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvSeller"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         app:layout_constraintLeft_toRightOf="@id/tvInfoSeller"
         app:layout_constraintTop_toTopOf="@id/tvInfoSeller"
+        tools:text="Toko bangunan" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvChatSeller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="6dp"
+        android:text="Chat/hubungi Penjual"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeller"
         tools:text="Toko bangunan" />
 
     <LinearLayout
@@ -186,7 +198,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSeller">
+        app:layout_constraintTop_toBottomOf="@+id/tvChatSeller">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvInfoDeskripsi"

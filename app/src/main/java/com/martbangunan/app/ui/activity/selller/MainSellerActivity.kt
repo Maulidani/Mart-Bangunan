@@ -32,7 +32,7 @@ class MainSellerActivity : AppCompatActivity() {
             when (id.itemId) {
                 R.id.navProduct -> loadFragment(ProductSellerFragment())
                 R.id.navChat -> loadFragment(ChatSellerFragment())
-                R.id.navSale -> loadFragment(SaleSellerFragment())
+//                R.id.navSale -> loadFragment(SaleSellerFragment())
                 R.id.navOthers -> loadFragment(OthersSellerFragment())
             }
             true

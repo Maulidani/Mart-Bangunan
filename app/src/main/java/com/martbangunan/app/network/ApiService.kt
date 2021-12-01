@@ -163,4 +163,28 @@ interface ApiService {
 //        @Field("total") total: Int,
 //        @Field("product_id") productId: Array<Int>,
 //    ): Call<ProductModel>
+
+    @POST("list-chat")
+    fun listChat(
+        @Header("Authorization") token: String,
+    ): Call<ChatModel>
+
+    @FormUrlEncoded
+    @POST("chat")
+    fun getChat(
+        @Header("Authorization") token: String,
+        @Field("to_user_id") id: Int,
+    ): Call<ChatModel>
+
+    @FormUrlEncoded
+    @POST("add-chat")
+    fun sendChat(
+        @Header("Authorization") token: String,
+        @Field("to_user_id") id: Int,
+        @Field("message") msg: String,
+    ): Call<ChatModel>
+
+    @GET("banner")
+    fun banner(): Call<BannerModel>
+
 }

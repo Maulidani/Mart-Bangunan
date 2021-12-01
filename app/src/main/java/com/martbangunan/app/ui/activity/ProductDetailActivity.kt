@@ -1,5 +1,6 @@
 package com.martbangunan.app.ui.activity
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -56,6 +57,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private val tvNameProduct: TextView by lazy { findViewById(R.id.tvProductName) }
     private val tvSeller: TextView by lazy { findViewById(R.id.tvSeller) }
     private val tvPrice: TextView by lazy { findViewById(R.id.tvProductPrice) }
+    private val tvChat: TextView by lazy { findViewById(R.id.tvChatSeller) }
     private val tvDecription: TextView by lazy { findViewById(R.id.tvDeskripsi) }
     private val imgSLider: SliderView by lazy { findViewById(R.id.rvImageProduct) }
 
@@ -69,11 +71,6 @@ class ProductDetailActivity : AppCompatActivity() {
         sharedPref = PreferencesHelper(this)
         val type = sharedPref.getString(Constant.PREF_TYPE)
         val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
-        if (type == "seller") {
-            parentBtn.visibility = View.INVISIBLE
-        } else {
-            parentBtn.visibility = View.VISIBLE
-        }
 
         val idProduct = intent.getStringExtra("id")
         val nameProduct = intent.getStringExtra("name")
@@ -81,6 +78,19 @@ class ProductDetailActivity : AppCompatActivity() {
         val sellerProduct = intent.getStringExtra("seller_name")
         val priceProduct = intent.getStringExtra("price")
         val descriptionProduct = intent.getStringExtra("description")
+
+        if (type == "seller") {
+            tvChat.visibility = View.INVISIBLE
+            parentBtn.visibility = View.INVISIBLE
+        } else {
+            tvChat.setOnClickListener {
+                startActivity(Intent(this,ChatDetailActivity::class.java)
+                    .putExtra("id", sellerId?.toInt())
+                    .putExtra("name", sellerProduct)
+                )
+            }
+            parentBtn.visibility = View.VISIBLE
+        }
 
         tvBarNameProduct.text = nameProduct.toString()
         tvNameProduct.text = nameProduct.toString()
@@ -235,7 +245,7 @@ class ProductDetailActivity : AppCompatActivity() {
 //                        order(orderId, totalAmount.toInt())
 //                }
             } // set transaction finish callback (sdk callback)
-            .setMerchantBaseUrl("http://192.168.37.5:8000/api/midtrans/")
+            .setMerchantBaseUrl(Constant.URL_MIDTRANS)
             .enableLog(true) // enable sdk log (optional)
             .setLanguage("id")
             .setColorTheme(

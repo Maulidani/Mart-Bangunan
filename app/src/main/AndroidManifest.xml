@@ -15,7 +15,8 @@
         android:theme="@style/Theme.MartBangunan"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".ui.activity.ChatActivity"></activity>
+        <activity android:name=".ui.activity.ChatDetailActivity"></activity>
+        <activity android:name=".ui.activity.customer.ChatActivity" />
         <activity android:name=".ui.activity.EditAccountActivity" />
         <activity android:name=".ui.activity.selller.EditImageProductActivity" />
         <activity android:name=".ui.activity.selller.UploadProductActivity" />

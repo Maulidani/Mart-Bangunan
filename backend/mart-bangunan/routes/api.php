@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'UserAccountController@login');
 Route::post('register', 'UserAccountController@register');
 
+Route::get('banner', 'ProductController@banner');
+
 Route::middleware(['auth:api'])->group(function () {
     Route::get('user', 'UserAccountController@index');
     Route::post('logout', 'UserAccountController@logout');

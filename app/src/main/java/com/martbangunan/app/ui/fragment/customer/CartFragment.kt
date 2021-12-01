@@ -193,7 +193,7 @@ class CartFragment : Fragment(), CartAdapter.iUserRecycler {
 //                        order(orderId, totalAmount.toInt())
 //                }
             } // set transaction finish callback (sdk callback)
-            .setMerchantBaseUrl("http://192.168.37.5:8000/api/midtrans/")
+            .setMerchantBaseUrl(Constant.URL_MIDTRANS)
             .enableLog(true) // enable sdk log (optional)
             .setLanguage("id")
             .setColorTheme(
