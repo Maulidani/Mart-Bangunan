@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SKActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAbout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:text="Syarat dan Ketentuan"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/imgBack"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="PEMBATASAN TANGGUNG JAWAB KAMI (PENYEDIA APK)"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="1.	Proses pengiriman barang akan dikoordinasikan oleh Kami dengan penyedia jasa pengiriman terpercaya."
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.	Kerugian yang dikarenakan dari tindakan pengguna yang melanggar Perjanjian ini sepenuhnya adalah tanggung jawab Pengguna dimana Kami lepas sepenuhnya dari tuntutan pihak-pihak yang dirugikan."
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3.	Barang yang sudah dibeli oleh Pengguna dan dibayar dengan dana dari Pengguna secara tepat dan sesuai dengan nilai barang yang dibeli Pengguna, tidak dapat dikembalikan atau dibatalkan secara sepihak oleh Pengguna, dan apabila setelah proses pembayaran dinyatakan berhasil dan kemudian barang yang dibeli Pengguna tidak ada, maka mart bangunan akan mencari alternatif barang pengganti atau melakukan pengembalian dana sesuai dengan nilai yang telah dibayarkan oleh pembeli."
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PENGGUNA TERDAFTAR"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Dengan memilih untuk membuat akun sebagai member dari situs drishop.co.id, Pengguna Terdaftar akan membuat sebuah nama akun dan password ketika menyelesaikan proses registrasi. Pengguna Terdaftar bertanggung jawab untuk menjaga kerahasiaan dan keamanan atas nama akun dan password serta Pengguna Terdaftar bertanggung jawab sepenuhnya atas segala kegiatan yang diatasnamakan nama akun Pengguna Terdaftar."
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Pengguna Terdaftar menyetujui untuk Segera memberitahukan kepada Kami setiap adanya dugaan penggunaan yang tidak sah/valid dengan pengatasnamaan nama akun Pengguna terdaftar.
+Memastikan bahwa Pengguna Terdaftar keluar(log out) dari akun pada setiap akhir dari aktivitas pada situs MART BANGUNAN untuk menghindari kemungkinan terjadinya penyalahgunaan atas akun yang bersangkutan.
+"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="KETENTUAN UMUM BAGI PENGGUNA"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="80dp"
+                android:text="Setiap Pengguna sepakat untuk tidak menyalin, menggunakan atau mengunduh semua informasi, tulisan, gambar, rekaman video, direktori, dokumen, database atau iklan yang ada atau yang diperoleh melalui situs mart bangunan.co.id dengan tujuan apapun termasuk dan tidak terbatas pada di antaranya menjual kembali atau menyebarkan kembali isi situs mart bangunan.co.id, melakukan pemasaran massal (lewat email, SMS, surat biasa atau lainnya), menjalankan usaha untuk menyaingi situs mart bangunan.co.id atau memanfaatkan situs bangunan.co.id untuk keperluan komersial di luar kegiatan transaksi dengan bangunan.co.id Pengguna tidak diperbolehkan mengambil isi situs bangunan.co.id secara sistematis untuk membuat atau menyusun, baik secara langsung maupun tidak langsung, koleksi, kompilasi, database atau direktori (baik menggunakan perangkat otomatis ataupun proses manual) tanpa izin tertulis dari Kami. Selain itu Pengguna tidak diperkenankan menggunakan isi atau bahan tersebut di atas untuk tujuan apa pun yang tidak disebutkan di dalam Perjanjian ini."
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

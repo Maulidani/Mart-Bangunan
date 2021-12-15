@@ -19,8 +19,10 @@ import com.martbangunan.app.R
 import com.martbangunan.app.network.ApiClient
 import com.martbangunan.app.network.model.LogoutModel
 import com.martbangunan.app.network.model.UserModel
+import com.martbangunan.app.ui.activity.AboutActivity
 import com.martbangunan.app.ui.activity.EditAccountActivity
 import com.martbangunan.app.ui.activity.LoginAsActivity
+import com.martbangunan.app.ui.activity.SKActivity
 import com.martbangunan.app.utils.Constant
 import com.martbangunan.app.utils.PreferencesHelper
 import kotlinx.coroutines.CoroutineScope
@@ -39,6 +41,8 @@ class OthersSellerFragment : Fragment() {
     private val imgProfile: ImageView by lazy { requireActivity().findViewById(R.id.imgProfileAccount) }
     private val nameProfile: TextView by lazy { requireActivity().findViewById(R.id.tvNameProfileAccount) }
     private val profile: TextView by lazy { requireActivity().findViewById(R.id.tvProfileSeller) }
+    private val about: TextView by lazy { requireActivity().findViewById(R.id.tvTentang) }
+    private val sk: TextView by lazy { requireActivity().findViewById(R.id.tvSyaratKetentuan) }
     private val logout: TextView by lazy { requireActivity().findViewById(R.id.tvlogout) }
 
     override fun onCreateView(
@@ -56,6 +60,13 @@ class OthersSellerFragment : Fragment() {
 
         swipeRefresh.setOnRefreshListener {
             user(token)
+        }
+
+        about.setOnClickListener {
+            startActivity(Intent(requireContext(), AboutActivity::class.java))
+        }
+        sk.setOnClickListener {
+            startActivity(Intent(requireContext(), SKActivity::class.java))
         }
 
         logout.setOnClickListener {

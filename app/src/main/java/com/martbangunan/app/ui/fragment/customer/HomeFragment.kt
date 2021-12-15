@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
         val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
 
         setBanner()
-        getBanner()
 
         swipeRefresh.setOnRefreshListener {
             product(token)
@@ -83,6 +82,7 @@ class HomeFragment : Fragment() {
         }
         CoroutineScope(Dispatchers.Main).launch {
             Log.e(this.toString(), "user: loading...")
+            getBanner()
             product(token)
         }
     }
@@ -141,8 +141,7 @@ class HomeFragment : Fragment() {
         ApiClient.instances.banner().enqueue(object : Callback<BannerModel> {
             override fun onResponse(call: Call<BannerModel>, response: Response<BannerModel>) {
 
-                viewPager2.adapter = SliderAdapter(response.body()!!.banner as ArrayList<BannerImage>, viewPager2)
-                Log.e("onResponse ", response.body()!!.banner.toString())
+                viewPager2.adapter = response.body()?.banner?.let { SliderAdapter(it as ArrayList<BannerImage>, viewPager2) }
 
             }
 
