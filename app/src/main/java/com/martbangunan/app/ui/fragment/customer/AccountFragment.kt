@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -114,18 +115,19 @@ class AccountFragment : Fragment() {
                             nameProfile.text = user?.user_name
 
                             profile.setOnClickListener {
-                                startActivity(Intent(requireContext(), EditAccountActivity::class.java)
-                                    .putExtra("email", user?.email)
-                                    .putExtra("address", user?.address)
-                                    .putExtra("province", user?.province)
-                                    .putExtra("city", user?.city)
-                                    .putExtra("districts", user?.districts)
-                                    .putExtra("name", user?.user_name)
-                                    .putExtra("phone", user?.phone)
-                                    .putExtra("image", user?.image)
-                                    .putExtra("type", user?.type)
-                                    .putExtra("user_id", user?.user_id.toString())
-                                    .putExtra("address_id", user?.address_id)
+                                startActivity(
+                                    Intent(requireContext(), EditAccountActivity::class.java)
+                                        .putExtra("email", user?.email)
+                                        .putExtra("address", user?.address)
+                                        .putExtra("province", user?.province)
+                                        .putExtra("city", user?.city)
+                                        .putExtra("districts", user?.districts)
+                                        .putExtra("name", user?.user_name)
+                                        .putExtra("phone", user?.phone)
+                                        .putExtra("image", user?.image)
+                                        .putExtra("type", user?.type)
+                                        .putExtra("user_id", user?.user_id.toString())
+                                        .putExtra("address_id", user?.address_id)
                                 )
                             }
                         } else {
