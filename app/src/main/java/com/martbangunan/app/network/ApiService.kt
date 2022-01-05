@@ -187,7 +187,18 @@ interface ApiService {
     @GET("banner")
     fun banner(): Call<BannerModel>
 
+    // api location
     @GET("provinsi")
-    fun getProvince(): Call<BannerModel>
+    fun getProvince(): Call<LocationModel>
+
+    @GET("kota")
+    fun getCity(
+        @Query("id_provinsi") id: String
+    ): Call<LocationModel>
+
+    @GET("kecamatan")
+    fun getDistrict(
+        @Query("id_kota") id: String
+    ): Call<LocationModel>
 
 }
