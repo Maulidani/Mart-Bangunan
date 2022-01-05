@@ -6,9 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +16,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.martbangunan.app.R
 import com.martbangunan.app.network.ApiClient
-import com.martbangunan.app.network.model.RegisterModel
+import com.martbangunan.app.network.model.*
 import com.martbangunan.app.ui.activity.LoginActivity
-import com.martbangunan.app.ui.activity.LoginAsActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -36,9 +33,9 @@ class Registration2Activity : AppCompatActivity() {
 
     private val btnRegistration: MaterialButton by lazy { findViewById(R.id.btnRegistration) }
     private val address: TextInputEditText by lazy { findViewById(R.id.inputAddress) }
-    private val province: TextInputEditText by lazy { findViewById(R.id.inputProvince) }
-    private val city: TextInputEditText by lazy { findViewById(R.id.inputCity) }
-    private val districts: TextInputEditText by lazy { findViewById(R.id.inputDistrincts) }
+    private val province: AutoCompleteTextView by lazy { findViewById(R.id.inputProvince) }
+    private val city: AutoCompleteTextView by lazy { findViewById(R.id.inputCity) }
+    private val districts: AutoCompleteTextView by lazy { findViewById(R.id.inputDistrincts) }
 
     private val imgView: ImageView by lazy { findViewById(R.id.imgProfie) }
     private val tvPilihFoto: TextView by lazy { findViewById(R.id.tvPilihFoto) }
@@ -46,9 +43,15 @@ class Registration2Activity : AppCompatActivity() {
     private var reqBody: RequestBody? = null
     private var partImage: MultipartBody.Part? = null
 
+    private var itemProvince: MutableList<String> = ArrayList()
+    private var itemCity: MutableList<String> = ArrayList()
+    private var itemDistrict: MutableList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration2)
+
+        getProvince()
 
         val fullName = intent.getStringExtra("fullname")
         val email = intent.getStringExtra("email")
@@ -198,4 +201,147 @@ class Registration2Activity : AppCompatActivity() {
             }
         }
 
+    private fun getProvince() {
+
+        ApiClient.instanceLocation.getProvince().enqueue(object : Callback<LocationModel> {
+            override fun onResponse(call: Call<LocationModel>, response: Response<LocationModel>) {
+
+                if (response.isSuccessful) {
+                    val provinsi = response.body()?.provinsi
+                    if (provinsi != null) {
+                        for (i in provinsi) {
+                            itemProvince.add(i.nama)
+                        }
+                        val adapterList = ArrayAdapter(
+                            applicationContext,
+                            R.layout.support_simple_spinner_dropdown_item,
+                            itemProvince
+                        )
+                        province.setAdapter(adapterList)
+
+                        city.setOnClickListener {
+
+                            if (!province.text.isNullOrEmpty()) {
+
+                                var selectedProvince: ProvinsiList =
+                                    provinsi.filter { s -> s.nama == province.text.toString() }
+                                        .single()
+
+                                getCity(selectedProvince.id.toString())
+                            }
+
+                        }
+                    }
+
+                } else {
+                    Snackbar.make(
+                        parentView,
+                        "Gagal: periksa kembali koneksi anda", Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LocationModel>, t: Throwable) {
+                Snackbar.make(
+                    parentView,
+                    t.message.toString(), Snackbar.LENGTH_SHORT
+                ).show()
+
+                Log.e(this.toString(), "onFailure: " + t.message.toString())
+            }
+
+        })
+    }
+
+    private fun getCity(idCity: String) {
+
+        ApiClient.instanceLocation.getCity(idCity).enqueue(object : Callback<LocationModel> {
+            override fun onResponse(call: Call<LocationModel>, response: Response<LocationModel>) {
+
+                if (response.isSuccessful) {
+                    itemCity.clear()
+                    val kota = response.body()?.kota_kabupaten
+                    if (kota != null) {
+                        for (i in kota) {
+                            itemCity.add(i.nama)
+                        }
+                        val adapterList = ArrayAdapter(
+                            applicationContext,
+                            R.layout.support_simple_spinner_dropdown_item,
+                            itemCity
+                        )
+                        city.setAdapter(adapterList)
+
+                        districts.setOnClickListener {
+
+                            if (!city.text.isNullOrEmpty()) {
+                                var selectedDistrict: KotaList =
+                                    kota.filter { s -> s.nama == city.text.toString() }.single()
+
+                                getDistrict(selectedDistrict.id.toString())
+
+                            }
+                        }
+                    }
+
+                } else {
+                    Snackbar.make(
+                        parentView,
+                        "Gagal: periksa kembali koneksi anda", Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LocationModel>, t: Throwable) {
+                Snackbar.make(
+                    parentView,
+                    t.message.toString(), Snackbar.LENGTH_SHORT
+                ).show()
+
+                Log.e(this.toString(), "onFailure: " + t.message.toString())
+            }
+
+        })
+    }
+
+    private fun getDistrict(idDistrict: String) {
+
+        ApiClient.instanceLocation.getDistrict(idDistrict).enqueue(object :
+            Callback<LocationModel> {
+            override fun onResponse(call: Call<LocationModel>, response: Response<LocationModel>) {
+
+                if (response.isSuccessful) {
+                    itemDistrict.clear()
+                    val kecamatan = response.body()?.kecamatan
+                    if (kecamatan != null) {
+                        for (i in kecamatan) {
+                            itemDistrict.add(i.nama)
+                        }
+                        val adapterList = ArrayAdapter(
+                            applicationContext,
+                            R.layout.support_simple_spinner_dropdown_item,
+                            itemDistrict
+                        )
+                        districts.setAdapter(adapterList)
+                    }
+
+                } else {
+                    Snackbar.make(
+                        parentView,
+                        "Gagal: periksa kembali koneksi anda", Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LocationModel>, t: Throwable) {
+                Snackbar.make(
+                    parentView,
+                    t.message.toString(), Snackbar.LENGTH_SHORT
+                ).show()
+
+                Log.e(this.toString(), "onFailure: " + t.message.toString())
+            }
+
+        })
+    }
 }

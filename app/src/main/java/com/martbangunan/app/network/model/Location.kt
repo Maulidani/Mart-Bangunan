@@ -1,9 +1,9 @@
 package com.martbangunan.app.network.model
 
 data class LocationModel(
-    val provinsi: List<ProvinsiList>,
-    val kota_kabupaten: List<KotaList>,
-    val kecematan: List<KecList>
+    val provinsi: ArrayList<ProvinsiList>,
+    val kota_kabupaten: ArrayList<KotaList>,
+    val kecamatan: ArrayList<KecList>
 )
 
 data class ProvinsiList(
