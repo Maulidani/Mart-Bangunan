@@ -95,7 +95,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun user(token: String?) {
-            swipeRefresh.isRefreshing = true
+        swipeRefresh.isRefreshing = true
 
         ApiClient.instances.user("Bearer $token").enqueue(object : Callback<UserModel> {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
@@ -221,7 +221,7 @@ class AccountFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-            val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
-            user(token)
+        val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
+        user(token)
     }
 }
