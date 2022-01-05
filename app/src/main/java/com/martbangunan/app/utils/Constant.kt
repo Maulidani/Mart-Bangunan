@@ -3,6 +3,7 @@ package com.martbangunan.app.utils
 class Constant {
     companion object {
         const val BASE_URL = "https://mart-bangunan.000webhostapp.com/mart-bangunan/public/"
+        const val BASE_URL_API_LOCATION = "https://dev.farizdotid.com/api/daerahindonesia/"
         const val URL_MIDTRANS = BASE_URL + "api/midtrans/"
         const val URL_IMAGE_PRODUCT = BASE_URL + "image/product/"
         const val URL_IMAGE_USER = BASE_URL + "image/user/"

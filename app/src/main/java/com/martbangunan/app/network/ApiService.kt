@@ -187,4 +187,7 @@ interface ApiService {
     @GET("banner")
     fun banner(): Call<BannerModel>
 
+    @GET("provinsi")
+    fun getProvince(): Call<BannerModel>
+
 }

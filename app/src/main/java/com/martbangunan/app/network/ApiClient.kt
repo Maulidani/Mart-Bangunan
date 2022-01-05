@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private const val URL = "${Constant.BASE_URL}api/"
+    private const val URL_API_LOCATION = Constant.BASE_URL_API_LOCATION
 
     private val interceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -31,6 +32,15 @@ object ApiClient {
     val instances: ApiService by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        retrofit.create(ApiService::class.java)
+    }
+
+    val instanceLocation :ApiService by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(URL_API_LOCATION)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
