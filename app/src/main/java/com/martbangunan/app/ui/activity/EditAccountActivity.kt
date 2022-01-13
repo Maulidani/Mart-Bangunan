@@ -71,7 +71,7 @@ class EditAccountActivity : AppCompatActivity() {
         val cityIntent = intent.getStringExtra("city")
         val districtIntent = intent.getStringExtra("districts")
         val nameIntent = intent.getStringExtra("name")
-        val phoneIntent = intent.getIntExtra("phone", 0)
+        val phoneIntent = intent.getStringExtra("phone")
         val imageIntent = intent.getStringExtra("image")
         val typeIntent = intent.getStringExtra("type")
         userIDIntent = intent.getStringExtra("user_id").toString()

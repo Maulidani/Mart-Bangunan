@@ -26,7 +26,7 @@ data class UserInfoModel(
     val user_id: Int,
     val user_account_id: Int,
     val user_name: String,
-    val phone: Int,
+    val phone: String,
     val address_id: Int,
     val address: String,
     val image: String,
