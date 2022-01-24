@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,6 +35,7 @@ class ProductActivity : AppCompatActivity() {
     private val rv: RecyclerView by lazy { findViewById(R.id.rvProduct) }
 
     var category: String? = null
+    var seller: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +45,18 @@ class ProductActivity : AppCompatActivity() {
         val token = sharedPref.getString(Constant.PREF_AUTH_TOKEN)
 
         category = intent.getStringExtra("category").toString()
+        seller = intent.getStringExtra("seller").toString()
+
+        if (seller!="null") {
+            category = "seller"
+        }
 
         back.setOnClickListener {
             finish()
         }
 
         search.addTextChangedListener {
-            product(token,  search.text.toString())
+            product(token, search.text.toString())
         }
 
         swipeRefresh.setOnRefreshListener {
@@ -65,7 +72,7 @@ class ProductActivity : AppCompatActivity() {
     private fun product(token: String?, search: String) {
         swipeRefresh.isRefreshing = true
 
-        ApiClient.instances.allProduct("Bearer $token", category!!,search)
+        ApiClient.instances.allProduct("Bearer $token", category!!, search, seller!!)
             .enqueue(object : Callback<ProductModel> {
                 override fun onResponse(
                     call: Call<ProductModel>,

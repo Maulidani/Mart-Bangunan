@@ -19,31 +19,42 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->category === 'Material bangunan alami' || $request->category === 'Material bangunan pabrik') {
-
-            if ($request->category === 'Material bangunan alami') {
-                $alami = 1;
-            } else if ($request->category === 'Material bangunan pabrik') {
-                $alami = 2;
-            }
-
+        if($request->category === 'seller') {
             $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
-                ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-                ->join('users', 'products.user_id', '=', 'users.user_account_id')
-                ->where('products.product_category_id',  $alami)
-                ->where('products.name', 'like', "%" . $request->search . "%")
-                ->orderBy('products.created_at', 'DESC')
-                ->get(['users.name as seller_name', 'users.image as seller_image', 'products.*', 'image_products.*', 'product_categories.name as category']);
+            ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+            ->join('users', 'products.user_id', '=', 'users.user_account_id')
+            ->where('products.user_id', $request->seller)
+            ->orderBy('products.created_at', 'DESC')
+            ->get(['users.name as seller_name', 'users.phone', 'users.image as seller_image', 'products.*', 'image_products.*', 'product_categories.name as category']);
         } else {
 
-            $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
-                ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-                ->join('users', 'products.user_id', '=', 'users.user_account_id')
-                ->where('products.name', 'like', "%" . $request->search . "%")
-                ->orderBy('products.created_at', 'DESC')
-                ->get(['users.name as seller_name', 'users.image as seller_image', 'products.*', 'image_products.*', 'product_categories.name as category']);
-        }
+            if ($request->category === 'Material bangunan alami' || $request->category === 'Material bangunan pabrik') {
 
+                if ($request->category === 'Material bangunan alami') {
+                    $alami = 1;
+                } else if ($request->category === 'Material bangunan pabrik') {
+                    $alami = 2;
+                }
+
+                $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
+                    ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                    ->join('users', 'products.user_id', '=', 'users.user_account_id')
+                    ->where('products.product_category_id',  $alami)
+                    ->where('products.name', 'like', "%" . $request->search . "%")
+                    ->orderBy('products.created_at', 'DESC')
+                    ->get(['users.name as seller_name', 'users.phone', 'users.image as seller_image', 'products.*', 'image_products.*', 'product_categories.name as category']);
+            } else {
+
+                $product = Product::join('image_products', 'products.id', '=', 'image_products.product_id')
+                    ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                    ->join('users', 'products.user_id', '=', 'users.user_account_id')
+                    ->where('products.name', 'like', "%" . $request->search . "%")
+                    ->orderBy('products.created_at', 'DESC')
+                    ->get(['users.name as seller_name', 'users.phone','users.image as seller_image', 'products.*', 'image_products.*', 'product_categories.name as category']);
+            }
+
+
+        }
         $unique = $product->unique('product_id')->values();
 
         return response()->json([

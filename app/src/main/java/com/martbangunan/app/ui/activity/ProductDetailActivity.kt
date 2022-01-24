@@ -2,6 +2,7 @@ package com.martbangunan.app.ui.activity
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -20,6 +23,7 @@ import com.martbangunan.app.network.ApiClient
 import com.martbangunan.app.network.model.ProductModel
 import com.martbangunan.app.network.model.SliderItem
 import com.martbangunan.app.network.model.UserModel
+import com.martbangunan.app.ui.activity.selller.UploadProductActivity
 import com.martbangunan.app.utils.Constant
 import com.martbangunan.app.utils.PreferencesHelper
 import com.midtrans.sdk.corekit.core.MidtransSDK
@@ -77,6 +81,7 @@ class ProductDetailActivity : AppCompatActivity() {
         val sellerId = intent.getStringExtra("seller_id")
         val sellerProduct = intent.getStringExtra("seller_name")
         val priceProduct = intent.getStringExtra("price")
+        val phoneProduct = intent.getStringExtra("phone")
         val descriptionProduct = intent.getStringExtra("description")
 
         if (type == "seller") {
@@ -116,38 +121,57 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         btnCheckout.setOnClickListener {
-            parentQty.visibility = View.VISIBLE
-            var qty = 0
-            quantityCart.setText(qty.toString())
-            imgPlus.setOnClickListener {
-                qty += 1
-                quantityCart.setText(qty.toString())
-            }
-            imgMinus.setOnClickListener {
-                qty -= 1
-                quantityCart.setText(qty.toString())
-            }
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle("Aksi")
 
-            quantityCart.addTextChangedListener {
-                if (quantityCart.text.toString().isNotEmpty()) {
-                    qty = quantityCart.text.toString().toInt()
-
-                    if (quantityCart.text.isNullOrEmpty()) {
-                        qty = 0
+            val options = arrayOf("Chat whatsapp", "Checkout")
+            builder.setItems(
+                options
+            ) { _, which ->
+                when (which) {
+                    0 -> {
+                       openWhatsApp(phoneProduct.toString())
                     }
-                    val total = tvPrice.text.toString().toInt() * qty
-                    val name = tvNameProduct.text.toString()
+                    1 -> {
+                        parentQty.visibility = View.VISIBLE
+                        var qty = 0
+                        quantityCart.setText(qty.toString())
+                        imgPlus.setOnClickListener {
+                            qty += 1
+                            quantityCart.setText(qty.toString())
+                        }
+                        imgMinus.setOnClickListener {
+                            qty -= 1
+                            quantityCart.setText(qty.toString())
+                        }
 
-                    if (qty != 0) {
-                        checkOut(total, name)
-                    } else {
-                        Snackbar.make(
-                            parentView,
-                            "Isi jumlah produk", Snackbar.LENGTH_SHORT
-                        ).show()
+                        quantityCart.addTextChangedListener {
+                            if (quantityCart.text.toString().isNotEmpty()) {
+                                qty = quantityCart.text.toString().toInt()
+
+                                if (quantityCart.text.isNullOrEmpty()) {
+                                    qty = 0
+                                }
+                                val total = tvPrice.text.toString().toInt() * qty
+                                val name = tvNameProduct.text.toString()
+
+                                if (qty != 0) {
+                                    checkOut(total, name)
+                                } else {
+                                    Snackbar.make(
+                                        parentView,
+                                        "Isi jumlah produk", Snackbar.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
                     }
                 }
             }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+
 
         }
 
@@ -353,5 +377,12 @@ class ProductDetailActivity : AppCompatActivity() {
             })
             //
         }
+    }
+
+    private fun openWhatsApp(number: String) {
+        val url = "https://api.whatsapp.com/send?phone=+62$number"
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
     }
 }

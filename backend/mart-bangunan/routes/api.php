@@ -24,6 +24,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('logout', 'UserAccountController@logout');
     Route::post('edit', 'UserAccountController@edit');
     Route::post('edit-image', 'UserAccountController@editImage');
+    Route::post('seller', 'UserAccountController@seller');
 
     //product
     Route::post('upload-product', 'ProductController@upload');

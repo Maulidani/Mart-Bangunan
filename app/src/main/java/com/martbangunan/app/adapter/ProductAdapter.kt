@@ -67,6 +67,7 @@ class ProductAdapter(private val list: List<ProductDetailModel>, type: String) :
                         .putExtra("seller_id", result.user_id.toString())
                         .putExtra("seller_name", result.seller_name)
                         .putExtra("price", result.price.toString())
+                        .putExtra("phone", result.phone)
                         .putExtra("description", result.description)
                 )
             }

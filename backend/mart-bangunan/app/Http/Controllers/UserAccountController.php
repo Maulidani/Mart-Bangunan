@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class UserAccountController extends Controller
 {
 
+    public function seller(Request $request)
+    {
+        $user = User::join('addresses', 'users.address_id', '=', 'addresses.id')
+            ->join('user_accounts', 'users.user_account_id', '=', 'user_accounts.id')
+            ->where('user_accounts.type', 'seller')
+            ->get(['users.name as user_name', 'users.id as user_id','users.*', 'addresses.name as address', 'addresses.*', 'user_accounts.*']);
+
+        return response()->json([
+            'message' => 'Success',
+            'errors' => false,
+            'user' => $user
+        ]);;
+    }
+
     public function index(Request $request)
     {
         $id = $request->user()->id;

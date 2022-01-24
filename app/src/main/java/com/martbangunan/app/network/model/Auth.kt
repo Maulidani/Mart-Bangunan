@@ -11,12 +11,18 @@ data class RegisterModel(
     val message: String,
 )
 
-
 data class UserModel(
     val message: String,
     val errors: Boolean,
     val user: UserInfoModel
 )
+
+data class SellerModel(
+    val message: String,
+    val errors: Boolean,
+    val user: List<UserInfoModel>
+)
+
 data class LogoutModel(
     val message: String,
 )
@@ -38,7 +44,7 @@ data class UserInfoModel(
     val email: String,
     val email_verified_at: String,
     val type: String,
-    )
+)
 
 data class RegistrationSellerModel(
     val fullName: String

@@ -22,11 +22,13 @@ import coil.transform.CircleCropTransformation
 import com.google.android.material.snackbar.Snackbar
 import com.martbangunan.app.R
 import com.martbangunan.app.adapter.ProductAdapter
+import com.martbangunan.app.adapter.SellerAdapter
 import com.martbangunan.app.adapter.SliderAdapter
 import com.martbangunan.app.network.ApiClient
 import com.martbangunan.app.network.model.BannerImage
 import com.martbangunan.app.network.model.BannerModel
 import com.martbangunan.app.network.model.ProductModel
+import com.martbangunan.app.network.model.SellerModel
 import com.martbangunan.app.ui.activity.customer.ChatActivity
 import com.martbangunan.app.ui.activity.customer.ProductActivity
 import com.martbangunan.app.utils.Constant
@@ -45,9 +47,7 @@ class HomeFragment : Fragment() {
     private val swipeRefresh: SwipeRefreshLayout by lazy { requireActivity().findViewById(R.id.swapRefresh) }
 
     private val search: TextView by lazy { requireActivity().findViewById(R.id.tvSearch) }
-    private val rv: RecyclerView by lazy { requireActivity().findViewById(R.id.rvProduct) }
-
-    private val tvAllProduct: TextView by lazy { requireActivity().findViewById(R.id.tvAllProduct) }
+    private val rv: RecyclerView by lazy { requireActivity().findViewById(R.id.rvSeller) }
 
     private val viewPager2: ViewPager2 by lazy { requireActivity().findViewById(R.id.vpBanner) }
 
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         setBanner()
 
         swipeRefresh.setOnRefreshListener {
-            product(token)
+            seller(token)
         }
 
         chat.setOnClickListener {
@@ -77,34 +77,31 @@ class HomeFragment : Fragment() {
             startActivity(Intent(this.context, ProductActivity::class.java))
         }
 
-        tvAllProduct.setOnClickListener {
-            startActivity(Intent(requireContext(), ProductActivity::class.java))
-        }
         CoroutineScope(Dispatchers.Main).launch {
             Log.e(this.toString(), "user: loading...")
             getBanner()
-            product(token)
+            seller(token)
         }
     }
 
-    private fun product(token: String?) {
+    private fun seller(token: String?) {
         swipeRefresh.isRefreshing = true
 
-        ApiClient.instances.allProduct("Bearer $token", "", "")
-            .enqueue(object : Callback<ProductModel> {
+        ApiClient.instances.seller("Bearer $token")
+            .enqueue(object : Callback<SellerModel> {
                 override fun onResponse(
-                    call: Call<ProductModel>,
-                    response: Response<ProductModel>
+                    call: Call<SellerModel>,
+                    response: Response<SellerModel>
                 ) {
                     val message = response.body()?.message
                     val error = response.body()?.errors
-                    val product = response.body()?.product
+                    val seller = response.body()?.user
 
                     if (isAdded) {
                         if (response.isSuccessful) {
 
                             if (error == false) {
-                                val adapter = product?.let { ProductAdapter(it, "home") }
+                                val adapter = seller?.let { SellerAdapter(it) }
                                 rv.layoutManager = GridLayoutManager(requireContext(), 2)
                                 rv.adapter = adapter
 
@@ -125,7 +122,7 @@ class HomeFragment : Fragment() {
                     swipeRefresh.isRefreshing = false
                 }
 
-                override fun onFailure(call: Call<ProductModel>, t: Throwable) {
+                override fun onFailure(call: Call<SellerModel>, t: Throwable) {
                     if (isAdded) {
                         Snackbar.make(
                             parentView,

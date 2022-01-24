@@ -195,6 +195,7 @@ class AccountFragment : Fragment() {
 
                         }
                     } else {
+                        sharedPref.logout()
                         Snackbar.make(
                             parentView,
                             "Gagal logout", Snackbar.LENGTH_SHORT
@@ -210,6 +211,7 @@ class AccountFragment : Fragment() {
                         parentView,
                         "Gogal memuat informasi", Snackbar.LENGTH_SHORT
                     ).show()
+                    sharedPref.logout()
 
                     Log.e(this.toString(), "user: gagal")
                 }

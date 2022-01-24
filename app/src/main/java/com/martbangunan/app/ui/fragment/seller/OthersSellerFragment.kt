@@ -191,6 +191,7 @@ class OthersSellerFragment : Fragment() {
 
                         }
                     } else {
+                        sharedPref.logout()
                         Snackbar.make(
                             parentView,
                             "Gagal logout", Snackbar.LENGTH_SHORT
@@ -209,7 +210,7 @@ class OthersSellerFragment : Fragment() {
                     ).show()
 
                     Log.e(this.toString(), "user: gagal")
-
+                    sharedPref.logout()
                     swipeRefresh.isRefreshing = false
 
                 }

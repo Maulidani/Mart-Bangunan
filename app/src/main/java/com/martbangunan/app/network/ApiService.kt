@@ -26,6 +26,11 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<LogoutModel>
 
+    @POST("seller")
+    fun seller(
+        @Header("Authorization") token: String
+    ): Call<SellerModel>
+
     @Multipart
     @POST("register")
     fun registration(
@@ -71,6 +76,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Field("category") category: String,
         @Field("search") search: String,
+        @Field("seller") seller: String,
     ): Call<ProductModel>
 
     @FormUrlEncoded

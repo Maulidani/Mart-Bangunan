@@ -11,6 +11,7 @@ data class ProductModel(
 data class ProductDetailModel(
     val seller_name: String,
     val seller_image: String,
+    val phone: String,
     val id: Int,
     val user_id: Int,
     val name: String,
